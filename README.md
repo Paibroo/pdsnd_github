@@ -10,7 +10,7 @@ When executed, the bikeshare.py script prompts the user to input certain paramet
 
 Once the user provides the necessary inputs, the script reads the corresponding dataset file and performs various calculations and computations to generate statistical information and insights. 
 
-###Key Features
+### Key Features
 
 Some of the key features and analyses provided by bikeshare.py include:
 
@@ -23,6 +23,8 @@ Some of the key features and analyses provided by bikeshare.py include:
 4. **User information:** It provides insights into the types of users, such as subscribers or customers, and their corresponding counts.
 
 5. **User interaction:** The script allows users to view raw data upon request, displaying individual trip records based on the applied filters.
+
+6. **References** This display the author name and references used through-out the writing of this script.
 
 ### Software
 * Anaconda: _python, numpy, pandas_
