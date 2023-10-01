@@ -190,6 +190,7 @@ def display_data(df):
     
     print(f"\nThis took {time.time() - start_time} seconds.")
     print('-' * 40)
+    pd.set_option("display.max_column", 200)
     
 def references(df):
     """Reference list"""
