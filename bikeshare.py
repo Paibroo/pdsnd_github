@@ -2,10 +2,9 @@ import time
 import pandas as pd
 import numpy as np
 
-CITY_DATA = {'chicago': 'chicago.csv',
-             'new york city': 'new_york_city.csv',
-             'washington': 'washington.csv'}
-
+CITY_DATA = { 'chicago': 'chicago.csv',
+              'new york city': 'new_york_city.csv',
+              'washington': 'washington.csv' }
 
 def get_filters():
     """
@@ -17,16 +16,15 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     def get_city():
         while True:
             city = input('Enter a City (chicago, new york city, washington): ').lower()
-            if city in ['chicago', 'new york city', 'washington']:
+            if city in ['chicago','new york city', 'washington']:
                 return city
             else:
                 print('Invalid Input!. Enter a Valid City')
-
+         
     # TO DO: get user input for month (all, january, february, ... , june)
     def get_month():
         while True:
@@ -35,21 +33,21 @@ def get_filters():
                 return month
             else:
                 print('Invalid Input!. Enter a Valid Month')
-
+         
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     def get_day_of_week():
         while True:
             day_of_week = input('Enter a Day (all, monday, tuesday, ... sunday): ').lower()
-            if day_of_week in ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']:
+            if day_of_week in ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',                                'saturday', 'sunday']:
                 return day_of_week
             else:
                 print('Invalid Input!. Enter a Valid Day.')
-
+         
     city = get_city()
     month = get_month()
     day = get_day_of_week()
-
-    print('-' * 40)
+    
+    print('-'*40)
     return city, month, day
 
 
@@ -75,17 +73,16 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month) + 1
-
+        month = months.index(month)+ 1
+    
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()]
-
+        df = df[df['day_of_week'] == day.title()] 
+    
     return df
-
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -106,7 +103,7 @@ def time_stats(df):
     print("The Most Common Start Hour is: ", common_st_hour)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    print('-'*40)
 
 
 def station_stats(df):
@@ -125,10 +122,10 @@ def station_stats(df):
 
     # TO DO: display most frequent combination of start station and end station trip
     common_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
-    print('The most frequent combination of Start Station and End Station trip is: ', common_trip)
+    print('The most frequent combination of Start Station and End Station trip is: ',         common_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    print('-'*40)
 
 
 def trip_duration_stats(df):
@@ -146,7 +143,7 @@ def trip_duration_stats(df):
     print('The Average Travel Time is: ', average_travel_time)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    print('-'*40)
 
 
 def user_stats(df):
@@ -171,33 +168,36 @@ def user_stats(df):
         earliest_birth_year = df['Birth Year'].min()
         recent_birth_year = df['Birth Year'].max()
         common_birth_year = df['Birth Year'].mode()[0]
-        print(
-            '\nThe earliest birth year is: {}, \nThe most recent birth year is: {}, \nThe most common birth year is: {}\n' .format(earliest_birth_year, recent_birth_year, common_birth_year))
+        print('\nThe earliest birth year is: {}, \nThe most recent birth year is: {}, \nThe most common birth year is: {}\n'.format(earliest_birth_year, recent_birth_year, common_birth_year))
     else:
         print('Birth year data is not available for this city.')
 
     print(f"\nThis took {time.time() - start_time} seconds.")
     print('-' * 40)
 
-
 def display_data(df):
     """Display 5 rows of raw data from the data base files"""
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-
-    view_data = input(
-        '\nWould you like to view 5 rows of individual trip data? Enter yes or no:\n').lower()
+    
+    view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no:\n').lower()
     start_loc = 0
     while view_data == 'yes':
-        rows = df.iloc[start_loc:start_loc + 5]
+        rows = df.iloc[start_loc:start_loc+5]
         print('\nThis is the first 5 rows of data:\n', rows)
         start_loc += 5
         view_data = input("Do you wish to continue?: ").lower()
-
+    
     print(f"\nThis took {time.time() - start_time} seconds.")
     print('-' * 40)
-
-
+    
+def references(df):
+    """Reference list"""
+    name = 'Sanni Ibrahim'
+    reference = 'Udacity Team - https://learn.udacity.com/ and the udacity bot.'
+    
+    print('This Code Was Completed and Debugged by: {}, \nWith the help of the:{}'.format(name, reference))
+    
 def main():
     while True:
         city, month, day = get_filters()
@@ -208,11 +208,12 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_data(df)
-
+        references(df)
+        
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
 
 
 if __name__ == "__main__":
-    main()
+	main()
